@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { RecoilRoot } from "recoil";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "@/redux/store";
+import { QueryClientContext } from "./context/QueryClientProvider";
 
 
 
@@ -18,13 +19,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
       >
-        <Provider store={store.store}>
-          <PersistGate loading={null} persistor={store.persistor}>
-            <RecoilRoot>
-            {children}
-            </RecoilRoot>
-          </PersistGate>
-        </Provider>
+        <QueryClientContext>
+          <Provider store={store.store}>
+            <PersistGate loading={null} persistor={store.persistor}>
+              <RecoilRoot>
+              {children}
+              </RecoilRoot>
+            </PersistGate>
+          </Provider>
+        </QueryClientContext>
       </body>
     </html>
   );
